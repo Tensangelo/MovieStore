@@ -19,7 +19,7 @@ const Footer = () => {
             </article>
             <div className="flex justify-center items-center flex-col">
                 <Link
-                    href="https://github.com/Tensangelo/Technical-Jelou/tree/main"
+                    href="https://github.com/Tensangelo/MovieStore"
                     target='_blank'
                     rel='noopener noreferrer'
                     className='flex justify-center items-center'

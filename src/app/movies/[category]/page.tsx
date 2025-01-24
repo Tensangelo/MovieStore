@@ -21,6 +21,8 @@ interface Movie {
 const MoviesCategory = () => {
     const { category }: { category: "popular" | "now_playing" | "top_rated" | "upcoming" } = useParams();
 
+    console.log(category)
+
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
