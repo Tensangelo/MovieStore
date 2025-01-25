@@ -5,7 +5,7 @@
 
 ## Instalación
 
-1. Clona este repositorio: `[git clone <URL_del_repositorio>](https://github.com/Tensangelo/Technical-Jelou/tree/main](https://github.com/Tensangelo/MovieStore)`
+1. Clona este repositorio: `[git clone <URL_del_repositorio>] (https://github.com/Tensangelo/MovieStore.git)`
 2. Instala las dependencias: `npm install` (o `yarn install`)
 
 ## Uso
