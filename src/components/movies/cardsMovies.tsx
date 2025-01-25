@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+// Hooks
+import { useBookmark } from "@/hooks/useBookmark";
 // Icons
-import { FaBookmark } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import CircularProgressBar from "./circularBarProgress";
 
 interface ContainerProps {
@@ -12,8 +14,8 @@ interface PropsCards {
     id: number;
     title: string;
     release_date: string;
-    urlImage: string;
-    score: number;
+    poster_path: string;
+    vote_average: number;
 }
 
 export const ContainerCards = (props: ContainerProps) => {
@@ -27,7 +29,15 @@ export const ContainerCards = (props: ContainerProps) => {
 }
 
 export const CardsMovies = (props: PropsCards) => {
-    const { id, title, release_date, urlImage, score } = props;
+    const { id, title, release_date, poster_path, vote_average } = props;
+
+    const { isInWatchlist, handleBookmarkClick } = useBookmark({
+        id,
+        title,
+        release_date,
+        poster_path,
+        vote_average,
+    });
 
     // Ajustes de fechas para ser mas legible
     const date: Date = new Date(release_date);
@@ -41,7 +51,7 @@ export const CardsMovies = (props: PropsCards) => {
 
     // Ajuste de score por puntuacion
     const formatScore = (score: number): number => {
-        // Multiplicar por 10 y truncar (eliminar decimales)
+        // Eliminar decimales)
         const truncatedScore = Math.floor(score * 10);
 
         // Asegurarse de que el resultado esté en el rango [0, 100]
@@ -52,7 +62,7 @@ export const CardsMovies = (props: PropsCards) => {
         <div className="border-solid border-2 rounded-2xl max-w-[180px] shadow-lg mb-8 relative">
             <Link href={`/movies/info/${id}`}>
                 <Image
-                    src={`https://image.tmdb.org/t/p/w220_and_h330_face${urlImage}`}
+                    src={`https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`}
                     width={180}
                     height={273}
                     alt='picture of the movie'
@@ -62,7 +72,7 @@ export const CardsMovies = (props: PropsCards) => {
             <div className="max-w-max relative">
                 <div className="bg-black rounded-full max-w-max p-[3px] absolute top-[-25px] left-2">
                     <CircularProgressBar
-                        selectedValue={formatScore(score)}
+                        selectedValue={formatScore(vote_average)}
                         maxValue={100}
                         radius={22}
                         valueFontSize={12}
@@ -73,8 +83,8 @@ export const CardsMovies = (props: PropsCards) => {
             </div>
             <article className="mt-8 pl-2 pb-3">
                 <Link
-                    className="font-bold hover:text-[#6800ff] cursor-pointer"
-                    href={`https://image.tmdb.org/t/p/w220_and_h330_face${urlImage}`}
+                    className="font-bold text-[#220f3d] hover:text-[#6800ff] cursor-pointer"
+                    href={`/movies/info/${id}`}
                 >
                     {title}
                 </Link>
@@ -82,10 +92,11 @@ export const CardsMovies = (props: PropsCards) => {
             </article>
             <div className="flex justify-end w-[95%] absolute bottom-[-10px]">
                 <button
+                    onClick={handleBookmarkClick}
                     className="max-w-max transition-all duration-200 text-[#3d1b6d] hover:text-[#6800ff] hover:scale-105 cursor-pointer"
-                    aria-label="Agregar a mis favoritos"
+                    aria-label="Add whachlist"
                 >
-                    <FaBookmark size={30} />
+                    {isInWatchlist ? <FaBookmark size={30} /> : <FaRegBookmark size={30} />}
                 </button>
             </div>
         </div>

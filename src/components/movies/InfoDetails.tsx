@@ -1,13 +1,13 @@
-import { FaBookmark } from "react-icons/fa"
-import CircularProgressBar from "./circularBarProgress"
+// Components
+import CircularProgressBar from "./circularBarProgress";
 // Utils
-import { InfoMovie } from "@/utils/movie";
+import { InfoMovie } from "@/utils/movieTypes";
 
-type CardsInfoProps = {
-    movie: InfoMovie | null;
+type InfoDetailsProps = {
+    movie: InfoMovie;
 }
 
-export const CardsInfo = ({ movie }: CardsInfoProps) => {
+export const InfoDetails = ({ movie }: InfoDetailsProps) => {
 
     const formatScore = (score: number | undefined): number => {
         if (score === undefined) return 0;
@@ -27,7 +27,7 @@ export const CardsInfo = ({ movie }: CardsInfoProps) => {
     };
 
     return (
-        <section className="border rounded-md w-[240px] pl-6 pr-4 py-4">
+        <section className="border rounded-md w-[240px] pl-6 pr-4 py-4 relative">
             <h2 className="text-2xl text-[#220f3d]">Details</h2>
             <div className="w-[95%] border border-[#6800ff]" />
             <article className="mt-2">
@@ -42,8 +42,8 @@ export const CardsInfo = ({ movie }: CardsInfoProps) => {
 
                 <p className="text-lg font-bold text-[#220f3d] mt-4">Revenue</p>
                 <span>{formatCurrency(movie?.revenue)}</span>
-            </article>
-            <div className="mt-6 flex justify-around items-center">
+
+                <p className="text-lg font-bold text-[#220f3d] mt-4">User Score</p>
                 <CircularProgressBar
                     selectedValue={formatScore(movie?.vote_average)}
                     maxValue={100}
@@ -52,13 +52,7 @@ export const CardsInfo = ({ movie }: CardsInfoProps) => {
                     activeStrokeColor='#6800ff'
                     withGradient
                 />
-                <button
-                    className="max-w-max transition-all duration-200 text-[#3d1b6d] hover:text-[#6800ff] hover:scale-105 cursor-pointer"
-                    aria-label="Agregar a mis favoritos"
-                >
-                    <FaBookmark size={25} />
-                </button>
-            </div>
+            </article>
         </section>
     )
 }

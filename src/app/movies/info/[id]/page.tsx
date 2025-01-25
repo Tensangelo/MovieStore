@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 // components
-import { CardsInfo } from "@/components/movies/InfoDetails";
+import { InfoDetails } from "@/components/movies/InfoDetails";
 import { InfoHero } from "@/components/movies/infoHero";
 import { SliderHorizontal } from "@/components/tools/sliderHorizontal";
 import { LoadingSpinnerBig } from '@/components/tools/loadingSpinner';
@@ -11,7 +11,7 @@ import { LoadingSpinnerBig } from '@/components/tools/loadingSpinner';
 import { fetchMovieData } from '@/app/api/movies/getMovie';
 import { fetchMovieCast } from '@/app/api/movies/getCast';
 // Utils
-import { InfoMovie, CastMovie } from "@/utils/movie";
+import { InfoMovie, CastMovie } from "@/utils/movieTypes";
 
 const MovieInfo = () => {
     const { id } = useParams();
@@ -63,9 +63,7 @@ const MovieInfo = () => {
                             slidesPerView={4}
                             cast={dataCast}
                         />
-                        <CardsInfo
-                            movie={dataMovie}
-                        />
+                        {dataMovie && <InfoDetails movie={dataMovie} />}
                     </div>
                 </>
             )}

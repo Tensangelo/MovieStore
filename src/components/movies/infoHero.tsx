@@ -4,7 +4,7 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { VscDebugBreakpointLog } from "react-icons/vsc";
 import { GiDirectorChair } from "react-icons/gi";
 // Utils
-import { InfoMovie, CastMovie } from "@/utils/movie";
+import { InfoMovie, CastMovie } from "@/utils/movieTypes";
 
 type InfoHeroProps = {
     movie: InfoMovie | null;

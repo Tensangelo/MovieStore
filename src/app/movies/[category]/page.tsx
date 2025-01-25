@@ -9,19 +9,10 @@ import { SqueletonFilter } from "@/components/movies/skeletonFilter";
 // Api
 import { fetchMovieCategory } from "@/app/api/movies/getCategory";
 import { LoadingSpinnerSmall } from "@/components/tools/loadingSpinner";
-
-interface Movie {
-    id: number;
-    title: string;
-    release_date: string;
-    poster_path: string;
-    vote_average: number;
-}
+import { Movie } from "@/utils/movieTypes";
 
 const MoviesCategory = () => {
     const { category }: { category: "popular" | "now_playing" | "top_rated" | "upcoming" } = useParams();
-
-    console.log(category)
 
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState(true);
@@ -60,8 +51,8 @@ const MoviesCategory = () => {
                                     id={movie.id}
                                     title={movie.title}
                                     release_date={movie.release_date}
-                                    urlImage={movie.poster_path}
-                                    score={movie.vote_average}
+                                    poster_path={movie.poster_path}
+                                    vote_average={movie.vote_average}
                                 />
                             )
                         })}

@@ -19,3 +19,25 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.watchlist-count {
+  animation: bounce 0.3s ease;
+  font-size: 0.75rem;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.watchlist-count {
+  font-size: 0.75rem; /* Tamaño de fuente pequeño en dispositivos móviles */
+}
+
+@media (min-width: 768px) {
+  .watchlist-count {
+      font-size: 1rem; /* Tamaño más grande en pantallas grandes */
+  }
+}

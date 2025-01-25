@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Utils
-import { CastMovie } from "@/utils/movie";
+import { CastMovie } from "@/utils/movieTypes";
 
 interface PropsSlider {
     title: string;
@@ -20,8 +20,6 @@ interface PropsCast {
 
 export const SliderHorizontal = (props: PropsSlider & PropsCast) => {
     const { title, spaceBetween, slidesPerView, cast } = props;
-
-    console.log(cast?.cast);
 
     return (
         <div className="max-w-[70%]">

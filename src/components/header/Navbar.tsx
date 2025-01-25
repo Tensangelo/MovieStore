@@ -6,15 +6,20 @@ import Image from 'next/image';
 import { FaClipboardList } from "react-icons/fa6";
 import LogoMovie from '../../../public/movie.png';
 import { RiMovie2AiFill } from "react-icons/ri";
+// Store
+import { useWatchlist } from '@/store/useWatchlist';
 
 // Estilos reutilizables
 const StylesTextNavbar = 'block py-2 px-3 rounded hover:bg-[#3d1b6d] w-full text-center text-[#ffffff] h-[4rem] md:hover:bg-transparent md:p-0 w-[10rem]';
-const StylesList = 'hover:bg-[#3d1b6d] w-[10rem]';
+const StylesList = 'hover:bg-[#3d1b6d] w-[12rem]';
 const IconSize = 30;
 
 const Navbar = () => {
+    const { watchlist } = useWatchlist();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMoviesSubmenuOpen, setIsMoviesSubmenuOpen] = useState(false);
+
+    const [animationKey, setAnimationKey] = useState(0);
 
     const menuRef = useRef<HTMLDivElement | null>(null);
     const submenuRef = useRef<HTMLUListElement | null>(null);
@@ -36,6 +41,10 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        setAnimationKey(prevKey => prevKey + 1);
+    }, [watchlist.length]);
 
     const handleLinkClick = () => {
         setIsMenuOpen(false);
@@ -141,7 +150,15 @@ const Navbar = () => {
                                 onClick={handleLinkClick}
                             >
                                 <FaClipboardList className="mr-2" fontSize={IconSize} />
-                                Saved (+9)
+                                Watchlist
+                                {watchlist.length > 0 && (
+                                    <span
+                                        key={animationKey}
+                                        className="ml-1 w-6 h-6 bg-[#6800ff] text-white rounded-full text-sm font-bold flex items-center justify-center watchlist-count"
+                                    >
+                                        {watchlist.length}
+                                    </span>
+                                )}
                             </Link>
                         </li>
                     </ul>
