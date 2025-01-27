@@ -144,7 +144,7 @@ const Navbar = () => {
                         </li>
                         <li className={`${StylesList} rounded-md`}>
                             <Link
-                                href="/saved"
+                                href="/watchlist"
                                 passHref
                                 className={`${StylesTextNavbar} flex justify-center items-center text-xl`}
                                 onClick={handleLinkClick}

@@ -1,25 +1,20 @@
 'use client'
-import Image from "next/image";
+import { ReactNode } from "react";
 // Icons
 import { FaStar } from "react-icons/fa";
 // Slide
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
-// Utils
-import { CastMovie } from "@/utils/movieTypes";
+import { Swiper } from "swiper/react";
 
 interface PropsSlider {
     title: string;
     spaceBetween: number;
     slidesPerView: number;
+    children: ReactNode;
 }
 
-interface PropsCast {
-    cast: CastMovie | null;
-}
-
-export const SliderHorizontal = (props: PropsSlider & PropsCast) => {
-    const { title, spaceBetween, slidesPerView, cast } = props;
+export const SliderHorizontal = (props: PropsSlider) => {
+    const { title, spaceBetween, slidesPerView, children } = props;
 
     return (
         <div className="max-w-[70%]">
@@ -48,29 +43,7 @@ export const SliderHorizontal = (props: PropsSlider & PropsCast) => {
                     }
                 }}
             >
-                {cast?.cast.slice(0, 9).map((info) => {
-                    return (
-                        <SwiperSlide key={info.id}>
-                            <div className="flex justify-start items-center mt-4 border rounded-lg shadow-md w-[350px]">
-                                <picture>
-                                    <Image
-                                        src={`https://media.themoviedb.org/t/p/w138_and_h175_face/${info.profile_path}`}
-                                        width={138}
-                                        height={175}
-                                        alt="Photo actor"
-                                        className="h-[175px] rounded-tl-lg rounded-bl-lg"
-                                    />
-                                </picture>
-                                <div className="ml-4 mr-8 max-w-[170px]">
-                                    <p className="text-lg font-bold">
-                                        {info.name}
-                                    </p>
-                                    <span className="text-base font-light">{info.character}</span>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    );
-                })}
+                {children}
             </Swiper>
         </div>
     )

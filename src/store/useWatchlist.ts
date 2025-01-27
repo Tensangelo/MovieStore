@@ -40,8 +40,8 @@ export const useHydratedWatchlist = () => {
     }, [setWatchlist]);
 
     if (!hydrated) {
-        return { watchlist: [] };
+        return { watchlist: [], hydrated: false };
     }
 
-    return { watchlist };
+    return { watchlist, hydrated: true };
 };

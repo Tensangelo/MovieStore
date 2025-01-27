@@ -5,17 +5,10 @@ import { useBookmark } from "@/hooks/useBookmark";
 // Icons
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import CircularProgressBar from "./circularBarProgress";
+import { Movie } from "@/utils/movieTypes";
 
 interface ContainerProps {
     children: React.ReactNode;
-}
-
-interface PropsCards {
-    id: number;
-    title: string;
-    release_date: string;
-    poster_path: string;
-    vote_average: number;
 }
 
 export const ContainerCards = (props: ContainerProps) => {
@@ -28,7 +21,7 @@ export const ContainerCards = (props: ContainerProps) => {
     )
 }
 
-export const CardsMovies = (props: PropsCards) => {
+export const CardsMovies = (props: Movie) => {
     const { id, title, release_date, poster_path, vote_average } = props;
 
     const { isInWatchlist, handleBookmarkClick } = useBookmark({
@@ -40,14 +33,15 @@ export const CardsMovies = (props: PropsCards) => {
     });
 
     // Ajustes de fechas para ser mas legible
-    const date: Date = new Date(release_date);
-    const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-US', {
-        month: 'short',
-        day: '2-digit',
-        year: 'numeric',
-    });
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
 
-    const formatterDate: string = formatter.format(date);
+        return date.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        }).replace('de', 'de');
+    };
 
     // Ajuste de score por puntuacion
     const formatScore = (score: number): number => {
@@ -67,18 +61,21 @@ export const CardsMovies = (props: PropsCards) => {
                     height={273}
                     alt='picture of the movie'
                     className="rounded-t-xl"
+                    priority
                 />
             </Link>
             <div className="max-w-max relative">
                 <div className="bg-black rounded-full max-w-max p-[3px] absolute top-[-25px] left-2">
-                    <CircularProgressBar
-                        selectedValue={formatScore(vote_average)}
-                        maxValue={100}
-                        radius={22}
-                        valueFontSize={12}
-                        activeStrokeColor='#6800ff'
-                        withGradient
-                    />
+                    {vote_average && (
+                        <CircularProgressBar
+                            selectedValue={formatScore(vote_average)}
+                            maxValue={100}
+                            radius={22}
+                            valueFontSize={12}
+                            activeStrokeColor='#6800ff'
+                            withGradient
+                        />
+                    )}
                 </div>
             </div>
             <article className="mt-8 pl-2 pb-3">
@@ -88,7 +85,7 @@ export const CardsMovies = (props: PropsCards) => {
                 >
                     {title}
                 </Link>
-                <p className="font-light text-sm text-gray-500">{formatterDate}</p>
+                {release_date && <p className="font-light text-sm text-gray-500">{formatDate(release_date)}</p>}
             </article>
             <div className="flex justify-end w-[95%] absolute bottom-[-10px]">
                 <button

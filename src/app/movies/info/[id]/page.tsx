@@ -2,16 +2,19 @@
 
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
+import { SwiperSlide } from 'swiper/react';
 // components
+import { CardsHorizontal } from '@/components/tools/cardsHorizontal';
 import { InfoDetails } from "@/components/movies/InfoDetails";
 import { InfoHero } from "@/components/movies/infoHero";
 import { SliderHorizontal } from "@/components/tools/sliderHorizontal";
-import { LoadingSpinnerBig } from '@/components/tools/loadingSpinner';
+import { Loading } from '@/components/tools/loadingSpinner';
 // Api
 import { fetchMovieData } from '@/app/api/movies/getMovie';
 import { fetchMovieCast } from '@/app/api/movies/getCast';
 // Utils
 import { InfoMovie, CastMovie } from "@/utils/movieTypes";
+
 
 const MovieInfo = () => {
     const { id } = useParams();
@@ -29,7 +32,7 @@ const MovieInfo = () => {
                     const dataMovie = await fetchMovieData({ id: movieId });
                     const dataCast = await fetchMovieCast({ id: movieId });
                     setDataMovie(dataMovie);
-                    setDataCast(dataCast)
+                    setDataCast(dataCast);
                 } catch (err) {
                     setError(`Error fetching info movie: ${err}`);
                 } finally {
@@ -50,7 +53,7 @@ const MovieInfo = () => {
 
     return (
         <section className='mb-9'>
-            {loading ? <LoadingSpinnerBig /> : (
+            {loading ? <Loading heightLoading='65.5vh' /> : (
                 <>
                     <InfoHero
                         movie={dataMovie}
@@ -61,8 +64,23 @@ const MovieInfo = () => {
                             title="Top Cast"
                             spaceBetween={180}
                             slidesPerView={4}
-                            cast={dataCast}
-                        />
+                        >
+                            {dataCast?.cast.slice(0, 9).map((info) => {
+                                const { id, profile_path, name, character } = info;
+
+                                return (
+                                    <SwiperSlide key={info.id}>
+                                        <CardsHorizontal
+                                            idMovie={id}
+                                            image={profile_path}
+                                            title={name}
+                                            subtitle={character}
+                                            infoAlt='Photo of the performer'
+                                        />
+                                    </SwiperSlide>
+                                );
+                            })}
+                        </SliderHorizontal>
                         {dataMovie && <InfoDetails movie={dataMovie} />}
                     </div>
                 </>

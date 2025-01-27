@@ -8,7 +8,7 @@ import { CardsMovies, ContainerCards } from "@/components/movies/cardsMovies";
 import { SqueletonFilter } from "@/components/movies/skeletonFilter";
 // Api
 import { fetchMovieCategory } from "@/app/api/movies/getCategory";
-import { LoadingSpinnerSmall } from "@/components/tools/loadingSpinner";
+import { Loading } from "@/components/tools/loadingSpinner";
 import { Movie } from "@/utils/movieTypes";
 
 const MoviesCategory = () => {
@@ -19,7 +19,7 @@ const MoviesCategory = () => {
     const [page, setPage] = useState(1);
 
     const fetchMovies = async () => {
-        setLoading(true); //Inicia carga
+        setLoading(true);
         try {
             const data = await fetchMovieCategory({ category: category, page });
             setMovies((prevMovies) => [...prevMovies, ...data.results]);
@@ -43,23 +43,24 @@ const MoviesCategory = () => {
                 <div className="w-full">
                     <ContainerCards>
                         {movies.map((movie, i: number) => {
-                            const keyMovie = `${movie.id}${i}`
+                            const { id, title, release_date, poster_path, vote_average } = movie
+                            const keyMovie = `${id}${i}`
 
                             return (
                                 <CardsMovies
                                     key={keyMovie}
-                                    id={movie.id}
-                                    title={movie.title}
-                                    release_date={movie.release_date}
-                                    poster_path={movie.poster_path}
-                                    vote_average={movie.vote_average}
+                                    id={id}
+                                    title={title}
+                                    release_date={release_date}
+                                    poster_path={poster_path}
+                                    vote_average={vote_average}
                                 />
                             )
                         })}
                     </ContainerCards>
                     {loading ? (
                         <div className="w-full flex justify-end">
-                            <LoadingSpinnerSmall />
+                            <Loading />
                         </div>
                     ) : (
                         <div className="w-full flex justify-end">
