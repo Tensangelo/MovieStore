@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 // Icons
 import { FaStar } from "react-icons/fa";
 // Components
-import { CardsHorizontal } from "@/components/tools/cardsHorizontal";
 import { Loading } from '@/components/tools/loadingSpinner';
+import { WatchlistContent } from '@/components/watchlist/watchListContent';
 // Store
 import { useHydratedWatchlist } from '@/store/useWatchlist';
 // Api
@@ -60,8 +60,8 @@ const Watchlist = () => {
     }
 
     return (
-        <section className="w-full my-10">
-            <article className="max-w-[75rem] w-full m-auto">
+        <section className="w-full my-10 min-h-[527px]">
+            <article className="max-w-[75rem] w-[90%] m-auto">
                 <h2 className="text-2xl font-bold inline-flex items-center text-[#220f3d]">
                     <FaStar color="#6800ff" className="mr-2" />
                     My watchlist
@@ -77,9 +77,9 @@ const Watchlist = () => {
             ) : (
                 <>
                     {loading ? (
-                        <Loading />
+                        <Loading heightLoading='65.5vh' />
                     ) : (
-                        <section className="max-w-[85%] w-[70rem] m-auto rounded-md mt-10 py-5 lg:border lg:shadow-[#6800ff] lg:shadow-md">
+                        <section className="max-w-[85%] w-[70rem] m-auto mt-10">
                             {dataMovie?.map((movie) => {
                                 const {
                                     id,
@@ -91,7 +91,7 @@ const Watchlist = () => {
                                 } = movie;
 
                                 return (
-                                    <CardsHorizontal
+                                    <WatchlistContent
                                         key={id}
                                         idMovie={id}
                                         image={poster_path}
@@ -101,7 +101,7 @@ const Watchlist = () => {
                                         releaseDate={release_date}
                                         score={vote_average}
 
-                                        buttonsWatchlist={true}
+                                        buttonWatchlist={true}
                                     />
                                 )
                             })}

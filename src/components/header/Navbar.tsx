@@ -52,7 +52,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-[#220f3d] w-full">
+        <nav className="bg-[#220f3d] w-full sticky top-0 z-50">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto relative">
                 {/* Logo y enlace a la página principal */}
                 <Link href="/" passHref className="text-2xl text-white flex justify-center items-center p-8 hover:bg-[#3d1b6d] rounded-md">
