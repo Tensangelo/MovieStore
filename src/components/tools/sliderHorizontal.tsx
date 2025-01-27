@@ -8,16 +8,14 @@ import { Swiper } from "swiper/react";
 
 interface PropsSlider {
     title: string;
-    spaceBetween: number;
-    slidesPerView: number;
     children: ReactNode;
 }
 
 export const SliderHorizontal = (props: PropsSlider) => {
-    const { title, spaceBetween, slidesPerView, children } = props;
+    const { title, children } = props;
 
     return (
-        <div className="max-w-[70%]">
+        <div className="w-[85%] max-w-[1920px] lg:w-[75%]">
             <h2 className="text-2xl font-bold inline-flex items-center text-[#220f3d]">
                 <FaStar color="#6800ff" className="mr-2" />
                 {title}
@@ -26,21 +24,30 @@ export const SliderHorizontal = (props: PropsSlider) => {
             <div className="w-[95%] border border-[#6800ff]" />
 
             <Swiper
-                spaceBetween={spaceBetween}
-                slidesPerView={slidesPerView}
                 freeMode={true}
                 loop={true}
                 className="mt-4"
                 breakpoints={{
-                    640: {
+                    '@0.00': {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                    },
+                    '@0.75': {
                         slidesPerView: 2,
+                        spaceBetween: 10,
                     },
-                    768: {
+                    '@1.00': {
+                        slidesPerView: 2,
+                        spaceBetween: 10,
+                    },
+                    '@1.50': {
                         slidesPerView: 3,
+                        spaceBetween: 280,
                     },
-                    1024: {
+                    '@2.00': {
                         slidesPerView: 4,
-                    }
+                        spaceBetween: 320,
+                    },
                 }}
             >
                 {children}

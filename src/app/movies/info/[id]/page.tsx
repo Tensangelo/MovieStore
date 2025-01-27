@@ -60,11 +60,7 @@ const MovieInfo = () => {
                         cast={dataCast}
                     />
                     <div className="flex justify-around items-start flex-wrap mt-10">
-                        <SliderHorizontal
-                            title="Top Cast"
-                            spaceBetween={180}
-                            slidesPerView={4}
-                        >
+                        <SliderHorizontal title="Top Cast">
                             {dataCast?.cast.slice(0, 9).map((info) => {
                                 const { id, profile_path, name, character } = info;
 

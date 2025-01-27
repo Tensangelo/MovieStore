@@ -31,8 +31,6 @@ export const CardsHorizontal = (infoProps: CardsHorizontalProps) => {
         details,
         releaseDate,
         score,
-        widthContainer = '350px',
-        widthLimitText = '170px',
 
         buttonsWatchlist = false,
     } = infoProps;
@@ -65,9 +63,7 @@ export const CardsHorizontal = (infoProps: CardsHorizontalProps) => {
     });
 
     return (
-        <div className="flex justify-start items-center m-auto my-8 border rounded-lg shadow-md relative"
-            style={{ width: widthContainer }}
-        >
+        <div className={`w-[220px] h-max flex justify-center items-center flex-wrap flex-col m-auto my-8 py-4 border rounded-lg shadow-md shadow-[#6800ff] relative lg:flex-nowrap lg:shadow md:flex-row lg:p-0 lg:w-[350px] lg:h-[175px] lg:justify-start`} >
             <picture className="w-[138px] h-[175px]">
                 <Image
                     src={`https://media.themoviedb.org/t/p/w138_and_h175_face/${image}`}
@@ -77,7 +73,7 @@ export const CardsHorizontal = (infoProps: CardsHorizontalProps) => {
                     className="h-full rounded-tl-lg rounded-bl-lg"
                 />
             </picture>
-            <article className="ml-4 mr-8 py-5" style={{ maxWidth: widthLimitText }}>
+            <article className="ml-4 mr-8 py-5 w-[175px]">
                 {score ? (
                     <div className="flex items-center mb-2">
                         <CircularProgressBar
@@ -96,11 +92,11 @@ export const CardsHorizontal = (infoProps: CardsHorizontalProps) => {
                         </div>
                     </div>
                 ) : (
-                    <p className="text-lg font-bold text-[#220f3d]">
+                    <p className="text-lg font-bold text-[#220f3d] truncate">
                         {title}
                     </p>
                 )}
-                {subtitle && <span className="text-base text-gray-500">{subtitle}</span>}
+                {subtitle && <p className="text-base text-gray-500 truncate">{subtitle}</p>}
                 {details &&
                     <p className="mt-2 text-base">
                         {details}

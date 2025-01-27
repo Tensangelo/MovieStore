@@ -98,7 +98,7 @@ const Navbar = () => {
                                 Movies
                             </button>
                             {isMoviesSubmenuOpen && (
-                                <ul ref={submenuRef} className="absolute left-0 w-full rounded-bl-lg rounded-br-lg bg-[#220f3d] z-10 md:w-auto">
+                                <ul ref={submenuRef} className="absolute left-0 w-full rounded-bl-lg rounded-br-lg bg-[#220f3d] z-20 md:w-auto">
                                     <li className={`${StylesList}`}>
                                         <Link
                                             href="/movies/popular"

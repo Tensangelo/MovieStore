@@ -27,7 +27,7 @@ export const InfoDetails = ({ movie }: InfoDetailsProps) => {
     };
 
     return (
-        <section className="border rounded-md w-[240px] pl-6 pr-4 py-4 relative">
+        <section className="border rounded-md w-[240px] pl-6 pr-4 py-4 relative ml-10">
             <h2 className="text-2xl text-[#220f3d]">Details</h2>
             <div className="w-[95%] border border-[#6800ff]" />
             <article className="mt-2">

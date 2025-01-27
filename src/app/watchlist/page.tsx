@@ -79,7 +79,7 @@ const Watchlist = () => {
                     {loading ? (
                         <Loading />
                     ) : (
-                        <div className="max-w-[85%] w-[70rem] m-auto border shadow-md rounded-md mt-10 py-5">
+                        <section className="max-w-[85%] w-[70rem] m-auto rounded-md mt-10 py-5 lg:border lg:shadow-[#6800ff] lg:shadow-md">
                             {dataMovie?.map((movie) => {
                                 const {
                                     id,
@@ -101,14 +101,11 @@ const Watchlist = () => {
                                         releaseDate={release_date}
                                         score={vote_average}
 
-                                        widthContainer='90%'
-                                        widthLimitText='80%'
-
                                         buttonsWatchlist={true}
                                     />
                                 )
                             })}
-                        </div>
+                        </section>
                     )}
                 </>
             )}
