@@ -69,8 +69,8 @@ const Watchlist = () => {
                 <div className="w-[100%] border border-[#6800ff]" />
             </article>
             {watchlist.length === 0 ? (
-                <div className="bg-[#33175b] flex justify-center mt-8 items-center flex-col flex-wrap w-full max-w-[1300px] h-[447px] m-auto bourder rounded-xl px-4 sm:px-8">
-                    <h1 className="text-6xl sm:text-5xl md:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-[#6800ff] to-[#ff00ff] text-transparent bg-clip-text">
+                <div className="bg-[#33175b] flex justify-center mt-8 items-center flex-col flex-wrap w-[90%] max-w-[1300px] h-[447px] m-auto bourder rounded-xl px-4 sm:px-8">
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-center bg-gradient-to-r from-[#6800ff] to-[#ff00ff] text-transparent bg-clip-text">
                         There are no movies in your watchlist.
                     </h1>
                 </div>
